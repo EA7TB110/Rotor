@@ -1,0 +1,15 @@
+Conexiones Minidin.
+
+1 -> Rigth
+2 -> Left
+3 -> Speed
+4 -> A/D
+5 -> VD
+6 -> E
+
+La activacion del giro hacia le derecha o la izquierda, se raliza mediante una masa.
+Speed (Velocidad), Cuando hay 5V, gira a maxima velocidad.
+A/D señal del potenciometro de posicion del rotor.
+VD 5V del controlador del rotor.
+E Masa.
+La tension que hay en la patilla 6 es de 5V.
