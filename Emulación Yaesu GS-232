@@ -1,0 +1,41 @@
+Emulación Yaesu GS-232
+
+Al activar FEATURE_YAESU_EMULATION, el código predeterminado es la emulación GS-232B, sin embargo, si comenta #define OPTION_GS_232B_EMULATION, 
+el protocolo de interfaz predeterminado será la emulación GS-232A. Esta emulación GS-232B agrega soporte para los siguientes comandos:
+
+Z - alternar el modo centro norte y sur
+
+P36 - cambiar al modo de 360 ​​grados
+
+P45 - cambiar al modo de 450 grados
+
+Además, la salida de los comandos B, C y C2 es ligeramente diferente a la de la emulación GS-232A.
+
+Más allá de los comandos anteriores, GS-232A y B son esencialmente los mismos funcionalmente. Si A funciona bien para su configuración, 
+no es necesario presionar para cambiar a B.
+
+Comandos de búfer temporizados de Yaesu
+
+Para habilitar los comandos de búfer cronometrado de Yaesu, descomente esta línea: #define FEATURE_TIMED_BUFFER Al deshabilitar esta función 
+se liberará algo de memoria para otras funciones.
+
+Protocolo Easycom
+
+Sorprendentemente, el protocolo Easycom no ofrece un medio para consultar el azimut o la elevación desde un controlador. 
+Sin embargo, el código contiene dos extensiones no estándar del protocolo que se pueden activar con estas líneas:
+
+#define OPTION_EASYCOM_AZ_QUERY_COMMAND
+
+#define OPTION_EASYCOM_EL_QUERY_COMMAND
+
+Con estas opciones, los comandos AZ y EL sin parámetros devolverán el azimut o la elevación actual.
+
+Resolución de décimo de grado
+
+Los encabezados de mayor precisión se activan con esta línea:
+
+#define FEATURE_ONE_DECIMAL_PLACE_HEADINGS
+
+El protocolo Easycom admite de forma nativa una resolución de décimas de grado (es decir, 123,4 grados), sin embargo, 
+el protocolo Yaesu no lo hace. Si esta función está habilitada, la emulación del protocolo Yaesu seguirá reportando azimuts y elevaciones como números enteros. 
+Con esta función habilitada, la pantalla LCD mostrará títulos con mayor resolución.
