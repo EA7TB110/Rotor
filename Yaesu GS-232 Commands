@@ -1,0 +1,167 @@
+Yaesu GS-232 Commands
+
+B              - Report elevation
+C              - Report azimuth
+C2             - Report azimuth and elevation
+S              - Stop all rotation
+A              - Stop azimuth rotation
+E              - Stop elevation rotation
+L              - Rotate azimuth left (CCW)
+R              - Rotate azimuth right (CW)
+D              - Rotate elevation down
+U              - Rotate elevation up
+Mxxx           - Move to azimuth
+Wxxx yyy       - Move to azimuth xxxx and elevation yyy
+X1             - Change to azimuth rotation speed setting 1
+X2             - Change to azimuth rotation speed setting 2
+X3             - Change to azimuth rotation speed setting 3
+X4             - Change to azimuth rotation speed setting 4
+O              - Azimuth offset calibration
+F              - Azimuth full scale calibration
+O2             - Elevation offset calibration
+F2             - Elevation full scale calibration
+P36            - Switch to 360 degree mode
+P45            - Switch to 450 degree mode
+Z              - Toggle north / south centered mode
+H              - Help
+Easycom Commands
+
+AZ             - Read azimuth
+AZ[xx]x.x      - Initiate azimuth rotation to a heading	
+EL             - Read elevation
+EL[xx]x.x      - Initiate elevation rotation to a heading
+ML             - Move Left (CCW)
+MR             - Move Right (CW)
+MU             - Move Up
+MD             - Move Down
+SA             - Stop azimuth movement
+SE             - Stop elevation rotation
+Note that Easycom commands are executed upon receiving a space, carriage return, or line feed
+
+Easycom Command Reference
+
+DCU-1 Commands
+
+AP1###;         - Set azimuth target,  ### = 0 to 359
+AP1###<cr>      - Rotate to azimuth target,  ### = 0 to 359
+AM1;            - Execute rotation target that was set with AP1###; command
+AM1<cr>         - Execute rotation target that was set with AP1###; command
+AI1;            - Report azimuth in ";###" format
+AI1<cr>         - Report azimuth in ";###" format
+;               - (Semicolon with no other characters before it) Stop rotation
+Backslash Commands
+
+Backslash commands are available by default and are available regardless of activation of Yaesu or Easycom commands.
+
+\Ax[xxx][.][xxxx]   - manually calibrate azimuth
+\Ax[x][x]           - manually calibrate azimuth (FEATURE_AZ_POSITION_ROTARY_ENCODER & FEATURE_AZ_POSITION_PULSE_INPUT)
+\Bx[xxx][.][xxxx]   - manually calibrate elevation
+\Bx[x][x]           - manually calibrate elevation (FEATURE_EL_POSITION_ROTARY_ENCODER & FEATURE_EL_POSITION_PULSE_INPUT)
+\C                  - display clock
+\D                  - activate debug logs
+\E                  - initialize EEPROM
+\Fxx                - change I/O pin LOW, xx = pin number
+\Gxxxxxx            - set coordinates using grid square
+\H                  - Clear and redraw the LCD display
+\Ix[x][x]           - set az starting point
+\I                  - display the current az starting point
+\Jx[x][x]           - set az rotation capability
+\J                  - display the current az rotation capability
+\Kx                 - force disable the az brake even if a pin is defined (x: 0 = enable, 1 = disable)
+\K                  - display the current az brake state
+\L                  - rotate to long path
+\Mx                 - activate or deactivate moon tracking (x: 0 = deactivate, 1 = activate)
+\Nxx                - change I/O pin HIGH, xx = pin number
+\Oyyyymmddhhmm[ss]  - set clock (enter UTC time, not local time, seconds are optional) 
+\P                  - park antenna
+\PA[x][x][x]        - set / query park azimuth
+\PE[x][x][x]        - set / query park elevation
+\Q                  - Save settings in the EEPROM and restart
+\R                  - remote port receive sniff activate/deactivate
+\S[string]          - send text out remote port
+\T                  - remote port transmit sniff activate/deactivate
+\Ux                 - activate or deactivate sun tracking (x: 0 = deactivate, 1 = activate)
+\V[-]x[.][x][x][x]  - configure clock timezone offset in hours
+\Wxxyyy             - turn on pin PWM; xx = pin number, yyy = PWM value (0-255)
+\XM                 - calibrate azimuth and elevation to current moon position
+\XS                 - calibrate azimuth and elevation to current sun position
+\X0                 - clear calibration to defaults
+\Y                  - query AutoPark status
+\Yx[x][x][x]        - deactivate or activate AutoPark and set timer time
+\Z                  - suspend automatic remote commands
+\+                  - azimuth LCD display mode switch: normal, raw degrees, +overlap
+\~[x][x][x]         - satellite tracking status, x = seconds to periodically print (no argument = print once)
+\^x                 - activate or deactivate satellite tracking (x: 0 = deactivate, 1 = activate)
+\!                  - erase satellite TLE file area in eeprom
+\@                  - print satellite TLE file area from eeprom
+\#                  - load satellite Keplarian elements file into eeprom
+\$xxxxxxx           - change current satellite (xxxxxx = satellite name in stored TLE file)
+\%x[x][x]           - print next x passes of the current satellite (defaults to one with no parm)
+\|[x][x][x]         - list satellites available for tracking with current az and el, and next AOS and LOS,
+                      x = seconds to periodically print (no argument = print once)
+\(                  - show satellite, sun, and moon automatic tracking parameters
+\-                  - query audible alert state
+\-0                 - disable audible alerts
+\-1                 - enable audible alerts
+\-X                 - silence current audible alert
+\-~                 - manually trigger audible alert    
+\-A0                - disable AZ target alert
+\-A1                - enable AZ target alert
+\-E0                - disable EL target alert
+\-E1                - enable EL target alert 
+Extended Commands
+
+(Commands below are disabled if compiling with OPTION_SAVE_MEMORY_EXCLUDE_EXTENDED_COMMANDS)
+
+\?ARxx              - analog pin read; xx = pin #
+\?AS                - query azimuth rotation status
+\?AWxxyyy           - analog pin write; xx = pin #, yyy = value to write (0 - 255)
+\?AZ                - query azimuth
+\?BCxxxxx yyyyy     - calculate bearing to coordinate target xxxxx = latitude, yyyyy = longitude
+\?BGxxxx[xx]        - calculate bearing to grid target
+\?CL                - read clock
+\?CGxxxx[xx]        - convert grid to coordinates
+\?CCxxxxx yyyyy     - convert coordinates to grid xxxxx = latitude, yyyyy = longitude
+\?DLxx              - digital pin write low; xx = pin #
+\?DHxx              - digital pin write high; xx = pin # 
+\?DIxx              - digital pin initialize as input; xx = pin #
+\?DOxx              - digital pin initialize as output; xx = pin # (01, 02, A0,etc.)
+\?DPxx              - digital pin initialize as input with pullup; xx = pin #
+\?DRxx              - digital pin read; xx = pin #
+\?DTxxyyyy          - digital pin tone output; xx = pin #, yyyy = frequency
+\?EL                - query elevation
+\?ES                - query elevation rotation status
+\?GAx[x][x][.x][x]  - go to AZ xxx.x
+\?GEx[x][x][.x][x]  - go to EL
+\?GCxxxxx yyyyy     - go to coordinate target xxxxx = latitude, yyyyy = longitude (rotate azimuth)
+\?GTxxxx[xx]        - go to grid target (rotate azimuth) 
+\?GS                - query GPS sync status
+\?NTxx              - no tone; xx = pin #
+\?PG                - ping remote
+\?RD                - rotate down
+\?RC                - read coordinates
+\?RG                - read grid square
+\?RL                - rotate left
+\?RR                - rotate right
+\?RU                - rotate up
+\?SA                - stop azimuth rotation
+\?SE                - stop elevation rotation
+\?SS                - stop all rotation
+\?TSxxxx            - set satellite tracking check interval (mS)
+\?TUxxxx            - set sun tracking check interval (mS)
+\?TMxxxx            - set moon tracking check interval (mS)
+\?TXxxxx            - set satellite rotation interval (mS)
+\?TYxxxx            - set sun rotation interval (mS)
+\?TZxxxx            - set moon rotation interval (mS)
+\?TAx[.]x           - set satellite degrees difference threshold
+\?TBx[.]x           - set sun degrees difference threshold
+\?TCx[.]x           - set moon degrees difference threshold
+\?AO                - azimuth full CCW calibration      (Alpha Oscar, not A zero)
+\?AF                - azimuth full CW calibration
+\?EO                - elevation full DOWN calibration   (Echo Oscar, not E zero)
+\?EF                - elevation full UP calibration
+\?CV                - query code version
+Extended Command Responses
+
+\!OKxx[]            - response to command sent: valid command
+\!??xx[]            - response to command sent: error
