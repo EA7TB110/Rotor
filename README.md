@@ -1,0 +1,2 @@
+# Rotor
+Interface ordenador rotor
